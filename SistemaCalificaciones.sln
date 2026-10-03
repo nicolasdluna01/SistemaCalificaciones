@@ -5,7 +5,7 @@ VisualStudioVersion = 17.14.37216.2 d17.14
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SistemaCalificaciones.Class", "SistemaCalificaciones.Class\SistemaCalificaciones.Class.csproj", "{8E1D0A4E-4179-4E6F-B46C-DF0E8FE5AAF5}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SistemaCaificaciones.Web", "SistemaCaificaciones.Web\SistemaCaificaciones.Web.csproj", "{18FEC529-0A27-419B-AC8E-9600C95861FA}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SistemaCalificaciones.Web", "SistemaCalificaciones.Web\SistemaCalificaciones.Web.csproj", "{18FEC529-0A27-419B-AC8E-9600C95861FA}"
 	ProjectSection(ProjectDependencies) = postProject
 		{8E1D0A4E-4179-4E6F-B46C-DF0E8FE5AAF5} = {8E1D0A4E-4179-4E6F-B46C-DF0E8FE5AAF5}
 	EndProjectSection
