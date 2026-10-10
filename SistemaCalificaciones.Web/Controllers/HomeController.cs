@@ -1,8 +1,9 @@
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using SistemaCaificaciones.Web.Models;
+using SistemaCalifcaciones.Web.Models;
 using System.Diagnostics;
 
-namespace SistemaCaificaciones.Web.Controllers
+namespace SistemaCalifcaciones.Web.Controllers
 {
     public class HomeController : Controller
     {
@@ -23,6 +24,7 @@ namespace SistemaCaificaciones.Web.Controllers
             return View();
         }
 
+        [AllowAnonymous]
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
         {
