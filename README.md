@@ -13,6 +13,10 @@ Aplicación web para que los docentes registren las calificaciones de sus estudi
 - `SistemaCalificaciones.Class`: modelos, DbContext, repositorios y migraciones
 - `SistemaCalificaciones.Web`: aplicación web (MVC)
 
+## Módulos
+
+- [x] Módulo 1: inicio de sesión de docentes
+
 ## Configuración local
 
 1. Clona el repositorio.
@@ -24,3 +28,13 @@ Aplicación web para que los docentes registren las calificaciones de sus estudi
 4. Ejecuta el proyecto `SistemaCalificaciones.Web`.
 
 `appsettings.Development.json` no se sube al repositorio, para que cada colaborador use su propia base de datos.
+
+## Usuario de prueba
+
+Al ejecutar la aplicación en el entorno de Desarrollo se crea automáticamente un docente de prueba (solo si no existe):
+
+| Usuario | Contraseña |
+|---------|------------|
+| `docente` | `Docente123!` |
+
+Es únicamente para desarrollo local. Este usuario no se crea en otros entornos.
