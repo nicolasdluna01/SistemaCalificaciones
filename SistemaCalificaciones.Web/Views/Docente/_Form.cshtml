@@ -1,0 +1,73 @@
+﻿@model DocenteViewModel
+
+<div asp-validation-summary="ModelOnly" class="text-danger"></div>
+<input type="hidden" asp-for="Id" />
+
+<div class="row">
+    <div class="col-md-4 mb-3">
+        <label asp-for="NumeroEmpleado" class="form-label"></label>
+        <input asp-for="NumeroEmpleado" class="form-control" />
+        <span asp-validation-for="NumeroEmpleado" class="text-danger"></span>
+    </div>
+    <div class="col-md-8 mb-3">
+        <label asp-for="Nombre" class="form-label"></label>
+        <input asp-for="Nombre" class="form-control" />
+        <span asp-validation-for="Nombre" class="text-danger"></span>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-6 mb-3">
+        <label asp-for="ApellidoPaterno" class="form-label"></label>
+        <input asp-for="ApellidoPaterno" class="form-control" />
+        <span asp-validation-for="ApellidoPaterno" class="text-danger"></span>
+    </div>
+    <div class="col-md-6 mb-3">
+        <label asp-for="ApellidoMaterno" class="form-label"></label>
+        <input asp-for="ApellidoMaterno" class="form-control" />
+        <span asp-validation-for="ApellidoMaterno" class="text-danger"></span>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-6 mb-3">
+        <label asp-for="Correo" class="form-label"></label>
+        <input asp-for="Correo" class="form-control" type="email" />
+        <span asp-validation-for="Correo" class="text-danger"></span>
+    </div>
+    <div class="col-md-6 mb-3">
+        <label asp-for="Usuario" class="form-label"></label>
+        @if (Model.Id == 0)
+        {
+            <input asp-for="Usuario" class="form-control" autocomplete="off" />
+        }
+        else
+        {
+            <input asp-for="Usuario" class="form-control" readonly />
+            <div class="form-text">El usuario no se puede cambiar.</div>
+        }
+        <span asp-validation-for="Usuario" class="text-danger"></span>
+    </div>
+</div>
+
+@if (Model.Id == 0)
+{
+    <div class="row">
+        <div class="col-md-6 mb-3">
+            <label asp-for="Contrasena" class="form-label"></label>
+            <input asp-for="Contrasena" class="form-control" autocomplete="new-password" />
+            <div class="form-text">Mínimo 6 caracteres, con mayúscula, minúscula, número y símbolo.</div>
+            <span asp-validation-for="Contrasena" class="text-danger"></span>
+        </div>
+        <div class="col-md-6 mb-3">
+            <label asp-for="ConfirmarContrasena" class="form-label"></label>
+            <input asp-for="ConfirmarContrasena" class="form-control" autocomplete="new-password" />
+            <span asp-validation-for="ConfirmarContrasena" class="text-danger"></span>
+        </div>
+    </div>
+}
+
+<div class="form-check mb-3">
+    <input asp-for="Estatus" class="form-check-input" />
+    <label asp-for="Estatus" class="form-check-label"></label>
+</div>

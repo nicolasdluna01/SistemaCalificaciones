@@ -18,7 +18,7 @@ Aplicación web para que los docentes registren las calificaciones de sus estudi
 - [x] Inicio de sesión (Identity, con roles Admin, Docente y Alumno)
 - [x] Catálogo de asignaturas (Admin)
 - [x] Catálogo de grupos (Admin)
-- [ ] Catálogo de docentes
+- [x] Catálogo de docentes
 - [ ] Catálogo de estudiantes
 - [ ] Asignación de estudiantes y docentes a grupos
 - [ ] Captura de calificaciones (Docente)

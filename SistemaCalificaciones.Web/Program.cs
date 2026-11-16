@@ -5,6 +5,7 @@ using Microsoft.EntityFrameworkCore;
 using SistemaCalificaciones.Class.Data;
 using SistemaCalificaciones.Class.Repositories;
 using SistemaCalificaciones.Web.Data;
+using SistemaCalificaciones.Class.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -41,6 +42,7 @@ builder.Services.ConfigureApplicationCookie(options =>
 builder.Services.AddScoped<IDocenteRepository, DocenteRepository>();
 builder.Services.AddScoped<IAsignaturaRepository, AsignaturaRepository>();
 builder.Services.AddScoped<IGrupoRepository, GrupoRepository>();
+builder.Services.AddScoped<IDocenteService, DocenteService>();
 
 var app = builder.Build();
 
