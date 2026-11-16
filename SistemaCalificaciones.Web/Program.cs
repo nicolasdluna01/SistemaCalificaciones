@@ -1,4 +1,4 @@
-using Microsoft.AspNetCore.Authorization;
+ï»¿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc.Authorization;
 using Microsoft.EntityFrameworkCore;
@@ -8,7 +8,7 @@ using SistemaCalificaciones.Web.Data;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Toda la aplicación exige sesión iniciada, salvo lo marcado con [AllowAnonymous]
+// Toda la aplicaciÃ³n exige sesiÃ³n iniciada, salvo lo marcado con [AllowAnonymous]
 builder.Services.AddControllersWithViews(options =>
 {
     var policy = new AuthorizationPolicyBuilder().RequireAuthenticatedUser().Build();
@@ -17,7 +17,7 @@ builder.Services.AddControllersWithViews(options =>
 
 var connectionString = builder.Configuration.GetConnectionString("DefaultConnection")
     ?? throw new InvalidOperationException(
-        "Falta la cadena de conexión 'DefaultConnection'. Revisa appsettings.Development.json.");
+        "Falta la cadena de conexiÃ³n 'DefaultConnection'. Revisa appsettings.Development.json.");
 
 builder.Services.AddDbContext<SistemaCalificacionesDB>(options =>
     options.UseSqlServer(connectionString, b => b.MigrationsAssembly("SistemaCalificaciones.Class")));

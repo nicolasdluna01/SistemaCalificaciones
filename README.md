@@ -15,7 +15,25 @@ Aplicación web para que los docentes registren las calificaciones de sus estudi
 
 ## Módulos
 
-- [x] Módulo 1: inicio de sesión de docentes
+- [x] Inicio de sesión (Identity, con roles Admin, Docente y Alumno)
+- [x] Catálogo de asignaturas (Admin)
+- [x] Catálogo de grupos (Admin)
+- [ ] Catálogo de docentes
+- [ ] Catálogo de estudiantes
+- [ ] Asignación de estudiantes y docentes a grupos
+- [ ] Captura de calificaciones (Docente)
+- [ ] Kardex (Alumno)
+
+## Usuarios de prueba
+
+Al ejecutar la aplicación en el entorno de Desarrollo se crean automáticamente estos usuarios (solo si no existen):
+
+| Rol | Usuario | Contraseña |
+|-----|---------|------------|
+| Admin | `admin` | `Admin123!` |
+| Docente | `docente` | `Docente123!` |
+
+Son únicamente para desarrollo local. Estos usuarios no se crean en otros entornos.
 
 ## Configuración local
 
@@ -28,13 +46,3 @@ Aplicación web para que los docentes registren las calificaciones de sus estudi
 4. Ejecuta el proyecto `SistemaCalificaciones.Web`.
 
 `appsettings.Development.json` no se sube al repositorio, para que cada colaborador use su propia base de datos.
-
-## Usuario de prueba
-
-Al ejecutar la aplicación en el entorno de Desarrollo se crea automáticamente un docente de prueba (solo si no existe):
-
-| Usuario | Contraseña |
-|---------|------------|
-| `docente` | `Docente123!` |
-
-Es únicamente para desarrollo local. Este usuario no se crea en otros entornos.

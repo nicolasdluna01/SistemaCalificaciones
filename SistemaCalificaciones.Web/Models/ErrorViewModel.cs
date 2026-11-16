@@ -1,4 +1,4 @@
-namespace SistemaCalifcaciones.Web.Models
+namespace SistemaCalificaciones.Web.Models
 {
     public class ErrorViewModel
     {

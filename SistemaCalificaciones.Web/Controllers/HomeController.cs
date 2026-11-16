@@ -1,9 +1,9 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using SistemaCalifcaciones.Web.Models;
+using SistemaCalificaciones.Web.Models;
 using System.Diagnostics;
 
-namespace SistemaCalifcaciones.Web.Controllers
+namespace SistemaCalificaciones.Web.Controllers
 {
     public class HomeController : Controller
     {
