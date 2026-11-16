@@ -1,0 +1,35 @@
+﻿@model GrupoModel
+
+<div asp-validation-summary="ModelOnly" class="text-danger"></div>
+<input type="hidden" asp-for="Id" />
+
+<div class="row">
+    <div class="col-md-4 mb-3">
+        <label asp-for="NombreGrupo" class="form-label"></label>
+        <input asp-for="NombreGrupo" class="form-control" placeholder="Ej. 3A" />
+        <span asp-validation-for="NombreGrupo" class="text-danger"></span>
+    </div>
+    <div class="col-md-4 mb-3">
+        <label asp-for="Semestre" class="form-label"></label>
+        <input asp-for="Semestre" class="form-control" />
+        <span asp-validation-for="Semestre" class="text-danger"></span>
+    </div>
+    <div class="col-md-4 mb-3">
+        <label asp-for="Turno" class="form-label"></label>
+        <select asp-for="Turno" asp-items="@((SelectList)ViewBag.Turnos)" class="form-select">
+            <option value="">Selecciona...</option>
+        </select>
+        <span asp-validation-for="Turno" class="text-danger"></span>
+    </div>
+</div>
+
+<div class="mb-3">
+    <label asp-for="Periodo" class="form-label"></label>
+    <input asp-for="Periodo" class="form-control" placeholder="Ej. Ago-Dic 2026" />
+    <span asp-validation-for="Periodo" class="text-danger"></span>
+</div>
+
+<div class="form-check mb-3">
+    <input asp-for="Estatus" class="form-check-input" />
+    <label asp-for="Estatus" class="form-check-label"></label>
+</div>

@@ -41,6 +41,9 @@ public class SistemaCalificacionesDB : IdentityDbContext<IdentityUser>
         // La clave de la asignatura no debe repetirse
         builder.Entity<AsignaturaModel>().HasIndex(a => a.ClaveAsignatura).IsUnique();
 
+        // No puede haber dos grupos con el mismo nombre en el mismo periodo
+        builder.Entity<GrupoModel>().HasIndex(g => new { g.NombreGrupo, g.Periodo }).IsUnique();
+
         // Sin borrado en cascada en NUESTRAS tablas (no tocamos las de Identity):
         // borrar un grupo o un docente no debe borrar calificaciones
         foreach (var fk in builder.Model.GetEntityTypes()

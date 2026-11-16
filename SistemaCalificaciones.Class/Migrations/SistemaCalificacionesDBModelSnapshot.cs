@@ -528,6 +528,9 @@ namespace SistemaCalificaciones.Class.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("NombreGrupo", "Periodo")
+                        .IsUnique();
+
                     b.ToTable("Grupos");
                 });
 

@@ -1,0 +1,63 @@
+﻿@model IEnumerable<GrupoModel>
+@{
+    ViewData["Title"] = "Grupos";
+}
+
+<div class="d-flex justify-content-between align-items-center mb-3">
+    <h1 class="h3 mb-0">Grupos</h1>
+    <a asp-action="Create" class="btn btn-primary">Nuevo grupo</a>
+</div>
+
+@if (TempData["Mensaje"] is string mensaje)
+{
+    <div class="alert alert-success">@mensaje</div>
+}
+
+@if (!Model.Any())
+{
+    <p class="text-muted">Todavía no hay grupos registrados.</p>
+}
+else
+{
+    <table class="table table-striped align-middle">
+        <thead>
+            <tr>
+                <th>Grupo</th>
+                <th>Semestre</th>
+                <th>Periodo</th>
+                <th>Turno</th>
+                <th>Estatus</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var g in Model)
+            {
+                <tr>
+                    <td>@g.NombreGrupo</td>
+                    <td>@g.Semestre</td>
+                    <td>@g.Periodo</td>
+                    <td>@g.Turno</td>
+                    <td>
+                        @if (g.Estatus)
+                        {
+                            <span class="badge bg-success">Activo</span>
+                        }
+                        else
+                        {
+                            <span class="badge bg-secondary">Inactivo</span>
+                        }
+                    </td>
+                    <td class="text-end">
+                        <a asp-action="Edit" asp-route-id="@g.Id" class="btn btn-sm btn-outline-primary">Editar</a>
+                        <form asp-action="CambiarEstatus" asp-route-id="@g.Id" method="post" class="d-inline">
+                            <button type="submit" class="btn btn-sm btn-outline-secondary">
+                                @(g.Estatus ? "Desactivar" : "Activar")
+                            </button>
+                        </form>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
