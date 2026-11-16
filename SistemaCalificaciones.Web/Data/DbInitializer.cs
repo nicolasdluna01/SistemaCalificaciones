@@ -7,36 +7,26 @@ namespace SistemaCalificaciones.Web.Data;
 
 public static class DbInitializer
 {
-    public const string RolDocente = "Docente";
-
     public static async Task SeedAsync(IServiceProvider services)
     {
         var db = services.GetRequiredService<SistemaCalificacionesDB>();
         var roleManager = services.GetRequiredService<RoleManager<IdentityRole>>();
         var userManager = services.GetRequiredService<UserManager<IdentityUser>>();
 
-        if (!await roleManager.RoleExistsAsync(RolDocente))
+        foreach (var rol in new[] { Roles.Admin, Roles.Docente, Roles.Alumno })
         {
-            await roleManager.CreateAsync(new IdentityRole(RolDocente));
-        }
-
-        const string usuario = "docente";
-        const string contrasena = "Docente123!";
-
-        var user = await userManager.FindByNameAsync(usuario);
-        if (user == null)
-        {
-            user = new IdentityUser { UserName = usuario, Email = "docente@prueba.com", EmailConfirmed = true };
-            var result = await userManager.CreateAsync(user, contrasena);
-            if (!result.Succeeded)
+            if (!await roleManager.RoleExistsAsync(rol))
             {
-                throw new InvalidOperationException(
-                    "No se pudo crear el docente de prueba: " + string.Join(", ", result.Errors.Select(e => e.Description)));
+                await roleManager.CreateAsync(new IdentityRole(rol));
             }
-            await userManager.AddToRoleAsync(user, RolDocente);
         }
 
-        if (!await db.Docentes.AnyAsync(d => d.Usuario == usuario))
+        // El admin solo es una cuenta de Identity; no tiene registro en Docentes
+        await CrearUsuarioAsync(userManager, "admin", "admin@prueba.com", "Admin123!", Roles.Admin);
+
+        var userDocente = await CrearUsuarioAsync(userManager, "docente", "docente@prueba.com", "Docente123!", Roles.Docente);
+
+        if (!await db.Docentes.AnyAsync(d => d.Usuario == "docente"))
         {
             db.Docentes.Add(new DocenteModel
             {
@@ -45,11 +35,28 @@ public static class DbInitializer
                 ApellidoPaterno = "De",
                 ApellidoMaterno = "Prueba",
                 Correo = "docente@prueba.com",
-                Usuario = usuario,
-                Contrasena = user.PasswordHash!, // copia del hash de Identity
-                UserId = user.Id
+                Usuario = "docente",
+                Contrasena = userDocente.PasswordHash!, // copia del hash de Identity
+                UserId = userDocente.Id
             });
             await db.SaveChangesAsync();
         }
+    }
+
+    private static async Task<IdentityUser> CrearUsuarioAsync(
+        UserManager<IdentityUser> userManager, string usuario, string correo, string contrasena, string rol)
+    {
+        var user = await userManager.FindByNameAsync(usuario);
+        if (user != null) return user;
+
+        user = new IdentityUser { UserName = usuario, Email = correo, EmailConfirmed = true };
+        var result = await userManager.CreateAsync(user, contrasena);
+        if (!result.Succeeded)
+        {
+            throw new InvalidOperationException(
+                $"No se pudo crear el usuario '{usuario}': " + string.Join(", ", result.Errors.Select(e => e.Description)));
+        }
+        await userManager.AddToRoleAsync(user, rol);
+        return user;
     }
 }

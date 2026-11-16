@@ -1,0 +1,40 @@
+﻿@model AsignaturaModel
+
+<div asp-validation-summary="ModelOnly" class="text-danger"></div>
+<input type="hidden" asp-for="Id" />
+
+<div class="row">
+    <div class="col-md-4 mb-3">
+        <label asp-for="ClaveAsignatura" class="form-label"></label>
+        <input asp-for="ClaveAsignatura" class="form-control" />
+        <span asp-validation-for="ClaveAsignatura" class="text-danger"></span>
+    </div>
+    <div class="col-md-8 mb-3">
+        <label asp-for="NombreAsignatura" class="form-label"></label>
+        <input asp-for="NombreAsignatura" class="form-control" />
+        <span asp-validation-for="NombreAsignatura" class="text-danger"></span>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-4 mb-3">
+        <label asp-for="Creditos" class="form-label"></label>
+        <input asp-for="Creditos" class="form-control" />
+        <span asp-validation-for="Creditos" class="text-danger"></span>
+    </div>
+    <div class="col-md-4 mb-3">
+        <label asp-for="Semestre" class="form-label"></label>
+        <input asp-for="Semestre" class="form-control" />
+        <span asp-validation-for="Semestre" class="text-danger"></span>
+    </div>
+    <div class="col-md-4 mb-3">
+        <label asp-for="Unidades" class="form-label"></label>
+        <input asp-for="Unidades" class="form-control" />
+        <span asp-validation-for="Unidades" class="text-danger"></span>
+    </div>
+</div>
+
+<div class="form-check mb-3">
+    <input asp-for="Estatus" class="form-check-input" />
+    <label asp-for="Estatus" class="form-check-label"></label>
+</div>

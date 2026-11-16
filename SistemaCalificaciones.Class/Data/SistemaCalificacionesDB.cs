@@ -38,6 +38,9 @@ public class SistemaCalificacionesDB : IdentityDbContext<IdentityUser>
         builder.Entity<CalificacionModel>()
             .HasIndex(c => new { c.EstudianteId, c.DocenteAsignaturaGrupoId, c.Unidad, c.Oportunidad }).IsUnique();
 
+        // La clave de la asignatura no debe repetirse
+        builder.Entity<AsignaturaModel>().HasIndex(a => a.ClaveAsignatura).IsUnique();
+
         // Sin borrado en cascada en NUESTRAS tablas (no tocamos las de Identity):
         // borrar un grupo o un docente no debe borrar calificaciones
         foreach (var fk in builder.Model.GetEntityTypes()

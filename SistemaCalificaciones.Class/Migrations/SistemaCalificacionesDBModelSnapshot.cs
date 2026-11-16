@@ -259,6 +259,9 @@ namespace SistemaCalificaciones.Class.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("ClaveAsignatura")
+                        .IsUnique();
+
                     b.ToTable("Asignaturas");
                 });
 

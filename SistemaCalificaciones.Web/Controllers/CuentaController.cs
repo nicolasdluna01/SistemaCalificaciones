@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using SistemaCalificaciones.Class.Models;
 using SistemaCalificaciones.Class.Repositories;
 using SistemaCalificaciones.Web.Models;
 
@@ -9,11 +10,16 @@ namespace SistemaCalificaciones.Web.Controllers;
 public class CuentaController : Controller
 {
     private readonly SignInManager<IdentityUser> _signInManager;
+    private readonly UserManager<IdentityUser> _userManager;
     private readonly IDocenteRepository _docenteRepository;
 
-    public CuentaController(SignInManager<IdentityUser> signInManager, IDocenteRepository docenteRepository)
+    public CuentaController(
+        SignInManager<IdentityUser> signInManager,
+        UserManager<IdentityUser> userManager,
+        IDocenteRepository docenteRepository)
     {
         _signInManager = signInManager;
+        _userManager = userManager;
         _docenteRepository = docenteRepository;
     }
 
@@ -42,12 +48,16 @@ public class CuentaController : Controller
             return View(model);
         }
 
-        // El docente debe existir y estar activo
-        var docente = await _docenteRepository.GetByUsuario(model.Usuario);
-        if (docente == null || !docente.Estatus)
+        // Un docente dado de baja no puede entrar aunque su contraseña sea correcta
+        var user = await _userManager.FindByNameAsync(model.Usuario);
+        if (user != null && await _userManager.IsInRoleAsync(user, Roles.Docente))
         {
-            ModelState.AddModelError(string.Empty, "Usuario o contraseña incorrectos.");
-            return View(model);
+            var docente = await _docenteRepository.GetByUsuario(model.Usuario);
+            if (docente == null || !docente.Estatus)
+            {
+                ModelState.AddModelError(string.Empty, "Usuario o contraseña incorrectos.");
+                return View(model);
+            }
         }
 
         var result = await _signInManager.PasswordSignInAsync(
@@ -80,5 +90,11 @@ public class CuentaController : Controller
     {
         await _signInManager.SignOutAsync();
         return RedirectToAction(nameof(Login));
+    }
+
+    [AllowAnonymous]
+    public IActionResult AccesoDenegado()
+    {
+        return View();
     }
 }

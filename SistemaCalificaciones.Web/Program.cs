@@ -33,11 +33,13 @@ builder.Services.AddIdentity<IdentityUser, IdentityRole>(options =>
 builder.Services.ConfigureApplicationCookie(options =>
 {
     options.LoginPath = "/Cuenta/Login";
+    options.AccessDeniedPath = "/Cuenta/AccesoDenegado";
     options.ExpireTimeSpan = TimeSpan.FromHours(2);
     options.SlidingExpiration = true;
 });
 
 builder.Services.AddScoped<IDocenteRepository, DocenteRepository>();
+builder.Services.AddScoped<IAsignaturaRepository, AsignaturaRepository>();
 
 var app = builder.Build();
 

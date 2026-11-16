@@ -1,0 +1,65 @@
+﻿@model IEnumerable<AsignaturaModel>
+@{
+    ViewData["Title"] = "Asignaturas";
+}
+
+<div class="d-flex justify-content-between align-items-center mb-3">
+    <h1 class="h3 mb-0">Asignaturas</h1>
+    <a asp-action="Create" class="btn btn-primary">Nueva asignatura</a>
+</div>
+
+@if (TempData["Mensaje"] is string mensaje)
+{
+    <div class="alert alert-success">@mensaje</div>
+}
+
+@if (!Model.Any())
+{
+    <p class="text-muted">Todavía no hay asignaturas registradas.</p>
+}
+else
+{
+    <table class="table table-striped align-middle">
+        <thead>
+            <tr>
+                <th>Clave</th>
+                <th>Nombre</th>
+                <th>Créditos</th>
+                <th>Semestre</th>
+                <th>Unidades</th>
+                <th>Estatus</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var a in Model)
+            {
+                <tr>
+                    <td>@a.ClaveAsignatura</td>
+                    <td>@a.NombreAsignatura</td>
+                    <td>@a.Creditos</td>
+                    <td>@a.Semestre</td>
+                    <td>@a.Unidades</td>
+                    <td>
+                        @if (a.Estatus)
+                        {
+                            <span class="badge bg-success">Activa</span>
+                        }
+                        else
+                        {
+                            <span class="badge bg-secondary">Inactiva</span>
+                        }
+                    </td>
+                    <td class="text-end">
+                        <a asp-action="Edit" asp-route-id="@a.Id" class="btn btn-sm btn-outline-primary">Editar</a>
+                        <form asp-action="CambiarEstatus" asp-route-id="@a.Id" method="post" class="d-inline">
+                            <button type="submit" class="btn btn-sm btn-outline-secondary">
+                                @(a.Estatus ? "Desactivar" : "Activar")
+                            </button>
+                        </form>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
