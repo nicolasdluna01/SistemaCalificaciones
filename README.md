@@ -19,7 +19,7 @@ Aplicación web para que los docentes registren las calificaciones de sus estudi
 - [x] Catálogo de asignaturas (Admin)
 - [x] Catálogo de grupos (Admin)
 - [x] Catálogo de docentes
-- [ ] Catálogo de estudiantes
+- [x] Catálogo de estudiantes
 - [ ] Asignación de estudiantes y docentes a grupos
 - [ ] Captura de calificaciones (Docente)
 - [ ] Kardex (Alumno)
