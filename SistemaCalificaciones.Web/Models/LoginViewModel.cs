@@ -5,7 +5,7 @@ namespace SistemaCalificaciones.Web.Models;
 public class LoginViewModel
 {
     [Required(ErrorMessage = "Ingresa tu usuario")]
-    [Display(Name = "Usuario")]
+    [Display(Name = "Usuario o matrícula")]
     public string Usuario { get; set; } = string.Empty;
 
     [Required(ErrorMessage = "Ingresa tu contraseña")]

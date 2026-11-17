@@ -12,15 +12,18 @@ public class CuentaController : Controller
     private readonly SignInManager<IdentityUser> _signInManager;
     private readonly UserManager<IdentityUser> _userManager;
     private readonly IDocenteRepository _docenteRepository;
+    private readonly IEstudianteRepository _estudianteRepository;
 
     public CuentaController(
         SignInManager<IdentityUser> signInManager,
         UserManager<IdentityUser> userManager,
-        IDocenteRepository docenteRepository)
+        IDocenteRepository docenteRepository,
+        IEstudianteRepository estudianteRepository)
     {
         _signInManager = signInManager;
         _userManager = userManager;
         _docenteRepository = docenteRepository;
+        _estudianteRepository = estudianteRepository;
     }
 
     [AllowAnonymous]
@@ -54,6 +57,17 @@ public class CuentaController : Controller
         {
             var docente = await _docenteRepository.GetByUsuario(model.Usuario);
             if (docente == null || !docente.Estatus)
+            {
+                ModelState.AddModelError(string.Empty, "Usuario o contraseña incorrectos.");
+                return View(model);
+            }
+        }
+
+        // Un alumno dado de baja no puede entrar aunque su contraseña sea correcta
+        if (user != null && await _userManager.IsInRoleAsync(user, Roles.Alumno))
+        {
+            var estudiante = await _estudianteRepository.GetByMatricula(model.Usuario);
+            if (estudiante == null || !estudiante.Estatus)
             {
                 ModelState.AddModelError(string.Empty, "Usuario o contraseña incorrectos.");
                 return View(model);

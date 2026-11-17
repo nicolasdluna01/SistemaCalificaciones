@@ -483,10 +483,18 @@ namespace SistemaCalificaciones.Class.Migrations
                         .HasColumnType("nvarchar(50)")
                         .HasColumnName("nombre");
 
+                    b.Property<string>("UserId")
+                        .HasColumnType("nvarchar(450)")
+                        .HasColumnName("id_usuario");
+
                     b.HasKey("Id");
 
                     b.HasIndex("Matricula")
                         .IsUnique();
+
+                    b.HasIndex("UserId")
+                        .IsUnique()
+                        .HasFilter("[id_usuario] IS NOT NULL");
 
                     b.ToTable("Estudiantes");
                 });
@@ -658,6 +666,16 @@ namespace SistemaCalificaciones.Class.Migrations
                     b.Navigation("Estudiante");
 
                     b.Navigation("Grupo");
+                });
+
+            modelBuilder.Entity("SistemaCalificaciones.Class.Models.EstudianteModel", b =>
+                {
+                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser", "User")
+                        .WithMany()
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Restrict);
+
+                    b.Navigation("User");
                 });
 #pragma warning restore 612, 618
         }

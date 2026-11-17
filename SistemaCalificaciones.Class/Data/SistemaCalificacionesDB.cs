@@ -44,6 +44,8 @@ public class SistemaCalificacionesDB : IdentityDbContext<IdentityUser>
         // No puede haber dos grupos con el mismo nombre en el mismo periodo
         builder.Entity<GrupoModel>().HasIndex(g => new { g.NombreGrupo, g.Periodo }).IsUnique();
 
+        builder.Entity<EstudianteModel>().HasIndex(e => e.UserId).IsUnique();
+
         // Sin borrado en cascada en NUESTRAS tablas (no tocamos las de Identity):
         // borrar un grupo o un docente no debe borrar calificaciones
         foreach (var fk in builder.Model.GetEntityTypes()
